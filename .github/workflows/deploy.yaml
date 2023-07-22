@@ -35,28 +35,28 @@ jobs:
       id: validate
       run: terraform validate -no-color
 
-    plan:
-      name: Plan
-      needs: validate
-      runs-on: ubuntu-latest
-      permissions:
-        packages: write
-        contents: read
-        id-token: write
-      steps:
-      - uses: actions/checkout@v1
-      - uses: hashicorp/setup-terraform@v2
+  plan:
+    name: Plan
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+      id-token: write
+    steps:
+    - uses: actions/checkout@v1
+    - uses: hashicorp/setup-terraform@v2
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          role-to-assume:  ${{ secrets.AWS_GITHUB_ROLE }}
-          aws-region: eu-west-2
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        role-to-assume:  ${{ secrets.AWS_GITHUB_ROLE }}
+        aws-region: eu-west-2
 
-      - name: Terraform Init
-        id: init
-        run: terraform init
+    - name: Terraform Init
+      id: init
+      run: terraform init
 
-      - name: Terraform Validate
-        id: validate
-        run: terraform plan
+    - name: Terraform Validate
+      id: validate
+      run: terraform plan
