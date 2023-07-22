@@ -59,12 +59,16 @@ jobs:
     - name: Terraform plan
       id: plan
       run: terraform plan -out tfplan
+    
+    - name: Terraform plan JSON
+      id: plan
+      run: terraform show -json tfplan > tfplan.json
 
     - name: Save TF plan
       uses: actions/upload-artifact@v3
       with:
-        name: tfplan
-        path: tfplan
+        name: tfplan.json
+        path: tfplan.json
   
   checkov:
     name: Checkov
@@ -74,7 +78,7 @@ jobs:
     - name: Download TF plan
       uses: actions/download-artifact@v3
       with:
-        name: tfplan
+        name: tfplan.json
 
     - name: DEBUG
       run: ls -la
@@ -82,6 +86,6 @@ jobs:
     - name: Run checkov
       uses: bridgecrewio/checkov-action@master
       with:
-        file: tfplan
+        file: tfplan.json
         output_format: cli
 
