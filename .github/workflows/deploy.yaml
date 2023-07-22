@@ -12,6 +12,10 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ secrets.SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.TENANT_ID }}
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+      id-token: write
     steps:
     - uses: actions/checkout@v1
     - uses: hashicorp/setup-terraform@v2
