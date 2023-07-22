@@ -34,7 +34,6 @@ jobs:
     - name: Terraform Validate
       id: validate
       run: terraform validate -no-color
-
   plan:
     name: Plan
     needs: validate
@@ -46,17 +45,17 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - uses: hashicorp/setup-terraform@v2
-
+    
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v2
       with:
-        role-to-assume:  ${{ secrets.AWS_GITHUB_ROLE }}
+        role-to-assume: ${{ secrets.AWS_GITHUB_ROLE }}
         aws-region: eu-west-2
-
-    - name: Terraform Init
+    
+    - name: Terraform init
       id: init
       run: terraform init
-
-    - name: Terraform Validate
-      id: validate
+    
+    - name: Terraform plan
+      id: plan
       run: terraform plan
