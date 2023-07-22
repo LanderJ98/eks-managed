@@ -83,4 +83,5 @@ jobs:
       uses: bridgecrewio/checkov-action@master
       with:
         file: tfplan.json
+        output_format: cli
 
