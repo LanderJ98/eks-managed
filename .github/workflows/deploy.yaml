@@ -63,11 +63,11 @@ jobs:
     - name: Debug plan
       run: ls -la
 
-  #   - name: Save TF plan
-  #     uses: actions/upload-artifact@v3
-  #     with:
-  #       name: tfplan.json
-  #       path: tfplan/tfplan.json
+    - name: Save TF plan
+      uses: actions/upload-artifact@v3
+      with:
+        name: tfplan.json
+        path: tfplan.json
   
   # checkov:
   #   name: Checkov
