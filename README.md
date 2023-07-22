@@ -8,7 +8,7 @@ Dependencies required for local provisioning:
 
 ## GitHub Actions
 
-I am using AzureRM as the TF backend due to its state locking abilities but using AWS as the Cloud provider to provision resources.
+I am using AzureRM as the TF backend due to its state locking abilities but AWS as the Cloud provider to provision resources.
 
 Configuring Azure Service principals
 ```shell
