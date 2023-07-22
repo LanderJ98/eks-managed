@@ -60,9 +60,6 @@ jobs:
       id: plan
       run: terraform plan -json -out tfplan.json
 
-    - name: Debug plan
-      run: ls -la
-
     - name: Save TF plan
       uses: actions/upload-artifact@v3
       with:
@@ -78,6 +75,9 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: tfplan.json
+
+    - name: DEBUG
+      run: ls -la
       
     - name: Run checkov
       uses: bridgecrewio/checkov-action@master
