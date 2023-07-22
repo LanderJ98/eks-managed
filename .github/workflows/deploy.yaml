@@ -64,7 +64,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: tfplan.json
-        path: tfplan
+        path: tfplan/tfplan.json
   
   checkov:
     name: Checkov
@@ -77,10 +77,10 @@ jobs:
         name: tfplan/tfplan.json
     
     - name: DEBUG
-      run: ls -la
+      run: ls -la tfplan
       
     - name: Run checkov
       uses: bridgecrewio/checkov-action@master
       with:
-        file: tfplan.json
+        file: tfplan/tfplan.json
 
