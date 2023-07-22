@@ -64,6 +64,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: tfplan.json
+        path: tfplan
   
   checkov:
     name: Checkov
@@ -73,7 +74,7 @@ jobs:
     - name: Download TF plan
       uses: actions/download-artifact@v3
       with:
-        name: tfplan.json
+        name: tfplan/tfplan.json
     
     - name: DEBUG
       run: ls -la
