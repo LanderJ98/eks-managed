@@ -76,7 +76,7 @@ jobs:
       with:
         name: tfplan-artifact.json
     
-    - name: DEBUG:
+    - name: DEBUG
       bash: ls -la
       
     - name: Run checkov
