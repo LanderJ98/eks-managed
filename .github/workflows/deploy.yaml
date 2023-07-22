@@ -65,3 +65,20 @@ jobs:
       with:
         name: tfplan-artifact
         path: tfplan
+  
+  checkov:
+    name: Checkov
+    needs: plan
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download TF plan
+      uses: actions/download-artifact@v3
+      with:
+        name: tfplan-artifact
+      
+      - name: Run checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          file: tfplan-artifact
+          framework: terraform
+
