@@ -13,20 +13,19 @@ jobs:
       ARM_TENANT_ID: ${{ secrets.TENANT_ID }}
     runs-on: ubuntu-latest
     steps:
-      - name: Check out code
-        uses: actions/checkout@v1
+    - uses: actions/checkout@v1
+    - uses: hashicorp/setup-terraform@v2
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          role-to-assume:  ${{ secrets.AWS_GITHUB_ROLE }}
-          aws-region: eu-west-2
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        role-to-assume:  ${{ secrets.AWS_GITHUB_ROLE }}
+        aws-region: eu-west-2
 
-      - name: Terraform validate
-        uses:  hashicorp/setup-terraform@v2
-        
-        id: init
-        run: terraform init
+    - name: Terraform Init
+      id: init
+      run: terraform init
 
-        id: validate
-        run: terraform validate -no-color
+    - name: Terraform Validate
+      id: validate
+      run: terraform validate -no-color
