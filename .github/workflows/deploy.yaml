@@ -61,7 +61,7 @@ jobs:
       run: terraform plan -out tfplan
     
     - name: Terraform plan JSON
-      id: plan
+      id: json-plan
       run: terraform show -json tfplan > tfplan.json
 
     - name: Save TF plan
