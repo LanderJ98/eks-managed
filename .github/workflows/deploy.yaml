@@ -62,7 +62,7 @@ jobs:
 
     - name: Terraform show json
       id: show
-      run: terraform show -json tfplan | jq '.' > tfplan.json 
+      run: terraform show -json tfplan > tfplan.json 
 
     - name: Save TF plan
       uses: actions/upload-artifact@v3
