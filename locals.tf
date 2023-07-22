@@ -1,5 +1,5 @@
 locals {
-    tags = {
-        "Cluster Name" = var.cluster_name
-    }
+  tags = {
+    "Cluster Name" = var.cluster_name
+  }
 }
