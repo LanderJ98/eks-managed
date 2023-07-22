@@ -35,7 +35,7 @@ jobs:
       id: validate
       run: terraform validate -no-color
 
-  - checkov:
+  checkov:
     name: Checkov
     needs: validate
     runs-on: ubuntu-latest
