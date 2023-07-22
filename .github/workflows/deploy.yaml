@@ -75,6 +75,9 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: tfplan-artifact.json
+    
+    - name: DEBUG:
+      bash: ls -la
       
     - name: Run checkov
       uses: bridgecrewio/checkov-action@master
