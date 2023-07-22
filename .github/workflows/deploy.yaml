@@ -69,21 +69,18 @@ jobs:
         name: tfplan.json
         path: tfplan.json
   
-  # checkov:
-  #   name: Checkov
-  #   needs: plan
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - name: Download TF plan
-  #     uses: actions/download-artifact@v3
-  #     with:
-  #       name: tfplan/tfplan.json
-    
-  #   - name: DEBUG
-  #     run: ls -la tfplan
+  checkov:
+    name: Checkov
+    needs: plan
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download TF plan
+      uses: actions/download-artifact@v3
+      with:
+        name: tfplan.json
       
-  #   - name: Run checkov
-  #     uses: bridgecrewio/checkov-action@master
-  #     with:
-  #       file: tfplan/tfplan.json
+    - name: Run checkov
+      uses: bridgecrewio/checkov-action@master
+      with:
+        file: tfplan.json
 
