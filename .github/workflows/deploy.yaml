@@ -39,7 +39,9 @@ jobs:
     name: Checkov
     needs: validate
     runs-on: ubuntu-latest
-    steps:    
+    steps:
+    - uses: actions/checkout@v1
+    
     - name: Run checkov
       uses: bridgecrewio/checkov-action@master
       with:
