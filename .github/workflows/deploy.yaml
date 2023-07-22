@@ -1,0 +1,32 @@
+name: Terraform CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate
+    env:
+      ARM_CLIENT_ID: ${{ secrets.CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.TENANT_ID }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v1
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume:  ${{ secrets.AWS_GITHUB_ROLE }}
+          aws-region: eu-west-2
+
+      - name: Terraform validate
+        uses:  hashicorp/setup-terraform@v2
+        
+        id: init
+        run: terraform init
+
+        id: validate
+        run: terraform validate -no-color
