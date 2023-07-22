@@ -80,5 +80,4 @@ jobs:
       uses: bridgecrewio/checkov-action@master
       with:
         file: tfplan-artifact.json
-        framework: terraform
 
