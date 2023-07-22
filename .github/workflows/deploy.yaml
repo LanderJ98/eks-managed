@@ -60,27 +60,30 @@ jobs:
       id: plan
       run: terraform plan -json -out tfplan.json
 
-    - name: Save TF plan
-      uses: actions/upload-artifact@v3
-      with:
-        name: tfplan.json
-        path: tfplan/tfplan.json
+    - name: Debug plan
+      run: ls -la
+
+  #   - name: Save TF plan
+  #     uses: actions/upload-artifact@v3
+  #     with:
+  #       name: tfplan.json
+  #       path: tfplan/tfplan.json
   
-  checkov:
-    name: Checkov
-    needs: plan
-    runs-on: ubuntu-latest
-    steps:
-    - name: Download TF plan
-      uses: actions/download-artifact@v3
-      with:
-        name: tfplan/tfplan.json
+  # checkov:
+  #   name: Checkov
+  #   needs: plan
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Download TF plan
+  #     uses: actions/download-artifact@v3
+  #     with:
+  #       name: tfplan/tfplan.json
     
-    - name: DEBUG
-      run: ls -la tfplan
+  #   - name: DEBUG
+  #     run: ls -la tfplan
       
-    - name: Run checkov
-      uses: bridgecrewio/checkov-action@master
-      with:
-        file: tfplan/tfplan.json
+  #   - name: Run checkov
+  #     uses: bridgecrewio/checkov-action@master
+  #     with:
+  #       file: tfplan/tfplan.json
 
