@@ -44,12 +44,12 @@ jobs:
       uses: bridgecrewio/checkov-action@master
       with:
         directory: ${{ github.workspace }}
-        frameworks: terraform
+        framework: terraform
         output_format: cli
 
   plan:
     name: Plan
-    needs: validate
+    needs: checkov
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
