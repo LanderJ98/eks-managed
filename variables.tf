@@ -49,3 +49,27 @@ variable "intra_subnets" {
   type    = list(string)
   default = ["10.10.7.0/24", "10.10.8.0/24", "10.10.9.0/24"]
 }
+variable "nginx_release_name" {
+  type    = string
+  default = "nginx"
+}
+
+variable "nginx_namespace" {
+  type    = string
+  default = "nginx"
+}
+
+variable "nginx_chart_name" {
+  type    = string
+  default = "ingress-nginx"
+}
+
+variable "nginx_repository" {
+  type    = string
+  default = "https://kubernetes.github.io/ingress-nginx"
+}
+
+variable "nginx_create_namespace" {
+  type    = bool
+  default = true
+}

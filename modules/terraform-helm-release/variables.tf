@@ -13,8 +13,9 @@ variable "repository" {
   description = "Helm chart repository"
 }
 
-variable "version" {
+variable "chart_version" {
   type        = string
+  default     = ""
   description = "Chart version"
 }
 
@@ -30,12 +31,13 @@ variable "create_namespace" {
 
 variable "wait" {
   type        = bool
-  default = false
+  default     = false
   description = "Whether to wait fro deployment to finish"
 }
 
 variable "set" {
   type = list(object({
-    
+    name  = string
+    value = string
   }))
 }
