@@ -7,8 +7,9 @@ module "nginx-controller" {
   create_namespace = var.nginx_create_namespace
   set = [
     {
-      name  = "service.beta.kubernetes.io/aws-load-balancer-type"
+      name  = "controller.service.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-type"
       value = "nlb"
+      type = "string"
     }
   ]
 
