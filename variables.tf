@@ -98,3 +98,8 @@ variable "external_dns_create_namespace" {
   type    = bool
   default = false
 }
+
+variable "external_dns_sa_name" {
+  type    = string
+  default = "external-dns"
+}

@@ -13,7 +13,7 @@ module "external_dns_deployment" {
     },
     {
       name  = "serviceAccount.name"
-      value = "external-dns"
+      value = var.external_dns_sa_name
       type  = "string"
     },
     {
