@@ -81,7 +81,7 @@ variable "external_dns_release_name" {
 
 variable "external_dns_namespace" {
   type    = string
-  default = "externaldns"
+  default = "kube-system"
 }
 
 variable "external_dns_chart_name" {
@@ -96,5 +96,5 @@ variable "external_dns_repository" {
 
 variable "external_dns_create_namespace" {
   type    = bool
-  default = true
+  default = false
 }
