@@ -1,4 +1,4 @@
-module "external_dns_controller" {
+module "external_dns_deployment" {
   source           = "./modules/terraform-helm-release"
   release_name     = var.external_dns_release_name
   repository       = var.external_dns_repository
@@ -9,27 +9,27 @@ module "external_dns_controller" {
     {
       name  = "rbac.apiVersion"
       value = "v1"
-      type = "string"
+      type  = "string"
     },
     {
       name  = "serviceAccount.name"
       value = "external-dns"
-      type = "string"
+      type  = "string"
     },
     {
       name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
-      value = module.iam_eks_role.iam_role_arn
-      type = "string"
+      value = module.external_dns_eks_role.iam_role_arn
+      type  = "string"
     },
     {
-      name = "txtOwnerId"
+      name  = "txtOwnerId"
       value = module.eks.cluster_name
-      type = "string"
+      type  = "string"
     },
     {
-      name = "logLevel"
+      name  = "logLevel"
       value = "debug"
-      type = "string"
+      type  = "string"
     }
   ]
 }

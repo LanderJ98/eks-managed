@@ -1,4 +1,4 @@
-module "nginx-controller" {
+module "nginx_controller" {
   source           = "./modules/terraform-helm-release"
   release_name     = var.nginx_release_name
   repository       = var.nginx_repository
@@ -9,7 +9,7 @@ module "nginx-controller" {
     {
       name  = "controller.service.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-type"
       value = "nlb"
-      type = "string"
+      type  = "string"
     }
   ]
 
