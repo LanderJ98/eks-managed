@@ -73,3 +73,33 @@ variable "nginx_create_namespace" {
   type    = bool
   default = true
 }
+
+variable "external_dns_release_name" {
+  type    = string
+  default = "external-dns"
+}
+
+variable "external_dns_namespace" {
+  type    = string
+  default = "kube-system"
+}
+
+variable "external_dns_chart_name" {
+  type    = string
+  default = "external-dns"
+}
+
+variable "external_dns_repository" {
+  type    = string
+  default = "https://kubernetes-sigs.github.io/external-dns"
+}
+
+variable "external_dns_create_namespace" {
+  type    = bool
+  default = false
+}
+
+variable "external_dns_sa_name" {
+  type    = string
+  default = "external-dns"
+}
