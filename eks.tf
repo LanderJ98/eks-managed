@@ -35,7 +35,7 @@ module "eks" {
     green = {
       min_size     = 1
       max_size     = 7
-      desired_size = 3
+      desired_size = 1
 
       instance_types = var.instance_types
       capacity_type  = "SPOT"
@@ -44,6 +44,10 @@ module "eks" {
         GithubRepo  = var.github_repo_name
       }
     }
+  }
+
+  node_security_group_tags = {
+    "kubernetes.io/cluster/${var.cluster_name}" = null
   }
 
   tags = local.tags
