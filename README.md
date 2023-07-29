@@ -52,3 +52,9 @@ You will then need to create a trust relationship to look like the below.
 ```
 
 Create a repo secret called AWS_GITHUB_ROLE and the value being the ARN of the role you create earlier
+
+## Terraform Docs
+
+<!-- BEGIN_TF_DOCS -->
+
+<!-- END_TF_DOCS -->
