@@ -6,7 +6,7 @@ variable "cluster_name" {
 
 variable "default_instance_types" {
   type        = list(string)
-  default     = ["t3.large"]
+  default     = ["t3.medium"]
   description = "The default instance types"
 }
 
@@ -102,4 +102,29 @@ variable "external_dns_create_namespace" {
 variable "external_dns_sa_name" {
   type    = string
   default = "external-dns"
+}
+
+variable "cert_manager_release_name" {
+  type    = string
+  default = "cert-manager"
+}
+
+variable "cert_manager_namespace" {
+  type    = string
+  default = "cert-manager"
+}
+
+variable "cert_manager_chart_name" {
+  type    = string
+  default = "cert-manager"
+}
+
+variable "cert_manager_repository" {
+  type    = string
+  default = "https://charts.jetstack.io"
+}
+
+variable "cert_manager_create_namespace" {
+  type    = bool
+  default = true
 }
