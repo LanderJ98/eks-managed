@@ -94,7 +94,7 @@ jobs:
       contents: read
       id-token: write
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
     - uses: hashicorp/setup-terraform@v2
     
     - name: Configure AWS credentials
@@ -132,6 +132,7 @@ jobs:
       contents: read
       id-token: write
     steps:
+    - uses: actions/checkout@v3
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v2
       with:
@@ -143,5 +144,15 @@ jobs:
     
     - name: debug
       run: ls -la
+
+    - name: Set Kubeconfig
+      id: kubeconfig
+      run: echo "KUBE_CONFIG=$(cat ${{ github.workspace }}/.kube/config | base64)" >> $GITHUB_OUTPUT
+    
+    - name: Deploy cluster issuer
+      uses: tale/kubectl-action@v1
+      with:
+        base64-kube-config: ${{ steps.kubeconfig.outputs.KUBE_CONFIG}}
+    - run: kubectl apply -f ${{ github.workspace}}/test/kuard_test.yaml
 
     
