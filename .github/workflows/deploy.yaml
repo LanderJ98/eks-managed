@@ -153,6 +153,6 @@ jobs:
       uses: tale/kubectl-action@v1
       with:
         base64-kube-config: ${{ steps.kubeconfig.outputs.KUBE_CONFIG}}
-    - run: kubectl apply -f ${{ github.workspace}}/test/kuard_test.yaml
+    - run: kubectl apply -f ${{ github.workspace}}/cluster_issuer/issuer.yaml
 
     

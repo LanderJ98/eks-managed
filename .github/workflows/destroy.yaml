@@ -10,8 +10,8 @@ env:
   ARM_TENANT_ID: ${{ secrets.TENANT_ID }}
 
 jobs:
-  validate:
-    name: Validate
+  destroy:
+    name: Destroy
     runs-on: ubuntu-latest
     permissions:
       packages: write
