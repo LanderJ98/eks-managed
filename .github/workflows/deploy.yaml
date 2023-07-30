@@ -126,7 +126,7 @@ jobs:
   deploy_cluster_issuer:
     name: cluster_issuer
     needs: apply
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
     permissions:
       packages: write
       contents: read
