@@ -121,7 +121,7 @@ jobs:
     
     - name: Apply
       id: apply
-      run: terraform apply tfplan -auto-approve
+      run: terraform apply -auto-approve tfplan
 
   deploy_cluster_issuer:
     name: cluster_issuer
