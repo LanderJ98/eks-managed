@@ -103,12 +103,12 @@ jobs:
         role-to-assume: ${{ secrets.AWS_GITHUB_ROLE }}
         aws-region: eu-west-2
 
-      - name: Install Helm 
-        uses: azure/setup-helm@v3
-        with:
-          version: latest # default is latest (stable)
-          token: ${{ secrets.GITHUB_TOKEN }} # only needed if version is 'latest'
-        id: install
+    - name: Install Helm 
+      uses: azure/setup-helm@v3
+      with:
+        version: latest # default is latest (stable)
+        token: ${{ secrets.GITHUB_TOKEN }} # only needed if version is 'latest'
+      id: install
 
     - name: Terraform Init
       id: init
