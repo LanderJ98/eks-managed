@@ -85,34 +85,63 @@ jobs:
         path: tfplan
   
 
-  # apply:
-  #   name: Apply
-  #   needs: validate
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     packages: write
-  #     contents: read
-  #     id-token: write
-  #   steps:
-  #   - uses: actions/checkout@v1
-  #   - uses: hashicorp/setup-terraform@v2
+  apply:
+    name: Apply
+    needs: plan
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+      id-token: write
+    steps:
+    - uses: actions/checkout@v1
+    - uses: hashicorp/setup-terraform@v2
     
-  #   - name: Configure AWS credentials
-  #     uses: aws-actions/configure-aws-credentials@v2
-  #     with:
-  #       role-to-assume: ${{ secrets.AWS_GITHUB_ROLE }}
-  #       aws-region: eu-west-2
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        role-to-assume: ${{ secrets.AWS_GITHUB_ROLE }}
+        aws-region: eu-west-2
 
-  #   - name: Terraform Init
-  #     id: init
-  #     run: terraform init
+      - name: Install Helm 
+        uses: azure/setup-helm@v3
+        with:
+          version: latest # default is latest (stable)
+          token: ${{ secrets.GITHUB_TOKEN }} # only needed if version is 'latest'
+        id: install
 
-  #   - name: Download Plan
-  #     uses: actions/download-artifact@v3
-  #     with:
-  #       name: tfplan
+    - name: Terraform Init
+      id: init
+      run: terraform init
+
+    - name: Download Plan
+      uses: actions/download-artifact@v3
+      with:
+        name: tfplan
     
-  #   - name: Apply
-  #     id: apply
-  #     run: terraform apply tfplan -auto-approve
+    - name: Apply
+      id: apply
+      run: terraform apply tfplan -auto-approve
+
+  deploy_cluster_issuer:
+    name: cluster_issuer
+    needs: apply
+    runs_on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+      id-token: write
+    steps:
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        role-to-assume: ${{ secrets.AWS_GITHUB_ROLE }}
+        aws-region: eu-west-2
+    
+    - name: Get kubeconfig
+      run: aws eks update-kubeconfig --region eu-west-2 --name test-cluster
+    
+    - name: debug
+      run: ls -la
+
     
