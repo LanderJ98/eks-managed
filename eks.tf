@@ -17,6 +17,8 @@ module "eks" {
     }
   }
 
+  create_kms_key = false
+  cluster_encryption_config = {}
 
   vpc_id                   = module.vpc.vpc_id
   subnet_ids               = module.vpc.private_subnets
@@ -45,6 +47,23 @@ module "eks" {
       }
     }
   }
+
+  # aws-auth configmap
+  manage_aws_auth_configmap = true
+
+  aws_auth_node_iam_role_arns_non_windows = [
+   "arn:aws:iam::${var.aws_account}:role/${var.role_name}",
+  ]
+  aws_auth_roles = [
+    {
+      rolearn  = "arn:aws:iam::${var.aws_account}:role/${var.role_name}"
+      username = "system:node:{{EC2PrivateDNSName}}"
+      groups = [
+        "system:bootstrappers",
+        "system:nodes",
+      ]
+    }
+  ]
 
   node_security_group_tags = {
     "kubernetes.io/cluster/${var.cluster_name}" = null
