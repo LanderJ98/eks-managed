@@ -88,6 +88,7 @@ No requirements.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_aws_account"></a> [aws\_account](#input\_aws\_account) | AWS account number | `string` | n/a | yes |
 | <a name="input_cert_manager_chart_name"></a> [cert\_manager\_chart\_name](#input\_cert\_manager\_chart\_name) | n/a | `string` | `"cert-manager"` | no |
 | <a name="input_cert_manager_create_namespace"></a> [cert\_manager\_create\_namespace](#input\_cert\_manager\_create\_namespace) | n/a | `bool` | `true` | no |
 | <a name="input_cert_manager_namespace"></a> [cert\_manager\_namespace](#input\_cert\_manager\_namespace) | n/a | `string` | `"cert-manager"` | no |
@@ -113,6 +114,7 @@ No requirements.
 | <a name="input_nginx_repository"></a> [nginx\_repository](#input\_nginx\_repository) | n/a | `string` | `"https://kubernetes.github.io/ingress-nginx"` | no |
 | <a name="input_private_subnets"></a> [private\_subnets](#input\_private\_subnets) | n/a | `list(string)` | <pre>[<br>  "10.10.1.0/24",<br>  "10.10.2.0/24",<br>  "10.10.3.0/24"<br>]</pre> | no |
 | <a name="input_public_subnets"></a> [public\_subnets](#input\_public\_subnets) | n/a | `list(string)` | <pre>[<br>  "10.10.4.0/24",<br>  "10.10.5.0/24",<br>  "10.10.6.0/24"<br>]</pre> | no |
+| <a name="input_role_name"></a> [role\_name](#input\_role\_name) | IAM role name | `string` | n/a | yes |
 | <a name="input_vpc_name"></a> [vpc\_name](#input\_vpc\_name) | VPC Name | `string` | `"cluster-vpc"` | no |
 
 ## Outputs
