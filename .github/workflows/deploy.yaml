@@ -76,7 +76,7 @@ jobs:
     
     - name: Terraform plan
       id: plan
-      run: terraform plan -out tfplan
+      run: terraform plan -var 'aws_account=${{ secrets.AWS_ACCOUNT}}' -var 'role_name=${{ secrets.ROLE_NAME}}' -out tfplan
 
     - name: Save TF plan
       uses: actions/upload-artifact@v3
@@ -141,13 +141,10 @@ jobs:
     
     - name: Get kubeconfig
       run: aws eks update-kubeconfig --region eu-west-2 --name test-cluster
-    
-    - name: debug
-      run: ls -la
 
     - name: Set Kubeconfig
       id: kubeconfig
-      run: echo "KUBE_CONFIG=$(cat ${{ github.workspace }}/.kube/config | base64)" >> $GITHUB_OUTPUT
+      run: echo "KUBE_CONFIG=$(cat /home/runner/.kube/config | base64)" >> $GITHUB_OUTPUT
     
     - name: Deploy cluster issuer
       uses: tale/kubectl-action@v1

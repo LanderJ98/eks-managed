@@ -4,6 +4,16 @@ variable "cluster_name" {
   description = "Name of the cluster"
 }
 
+variable "aws_account" {
+  description = "AWS account number"
+  type = string
+}
+
+variable "role_name" {
+  description = "IAM role name"
+  type = string
+}
+
 variable "default_instance_types" {
   type        = list(string)
   default     = ["t3.medium"]
