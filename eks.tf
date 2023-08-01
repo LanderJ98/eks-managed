@@ -54,13 +54,10 @@ module "eks" {
 
   manage_aws_auth_configmap = true
 
-  aws_auth_node_iam_role_arns_non_windows = [
-   "arn:aws:iam::${var.aws_account}:role/${var.role_name}",
-  ]
   aws_auth_roles = [
     {
       rolearn  = "arn:aws:iam::${var.aws_account}:role/${var.role_name}"
-      username = "system:node:{{EC2PrivateDNSName}}"
+      username = "jlander"
       groups = [
         "system:bootstrappers",
         "system:nodes",
