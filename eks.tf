@@ -57,7 +57,7 @@ module "eks" {
   aws_auth_roles = [
     {
       rolearn  = "arn:aws:iam::${var.aws_account}:role/${var.role_name}"
-      username = "jlander"
+      username = var.role_name
       groups = [
         "system:bootstrappers",
         "system:nodes",

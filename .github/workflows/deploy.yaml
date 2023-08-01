@@ -152,5 +152,11 @@ jobs:
     
     - name: Get ConfigMap
       run: kubectl describe cm aws-auth -n kube-system
+    
+    - name: Get ClusterRoles
+      run: kubectl get clusterroles 
+    
+    - name: Get ClusterRoleBindings
+      run: kubectl get clusterrolebindings
 
     
