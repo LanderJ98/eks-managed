@@ -132,7 +132,6 @@ jobs:
       contents: read
       id-token: write
     steps:
-    - uses: actions/checkout@v3
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v2
       with:
@@ -140,7 +139,7 @@ jobs:
         aws-region: eu-west-2
     
     - name: Get kubeconfig
-      run: aws eks update-kubeconfig --region eu-west-2 --name test-cluster --kubeconfig ${{ github.workspace}}/.kube/config
+      run: aws eks update-kubeconfig --region eu-west-2 --name test-cluster
 
     - name: Install kubectl
       uses: azure/setup-kubectl@v3
