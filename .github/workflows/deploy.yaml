@@ -141,11 +141,14 @@ jobs:
     - name: Get kubeconfig
       run: aws eks update-kubeconfig --region eu-west-2 --name test-cluster
 
+    - name: Debug
+      run: cat ~/.kube/config
+
     - name: Install kubectl
       uses: azure/setup-kubectl@v3
       with:
         version: 'latest' # default is latest stable
-      id: install 
+      id: install
     
     - name: Get ConfigMap
       run: kubectl describe cm aws-auth -n kube-system
