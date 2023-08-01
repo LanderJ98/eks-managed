@@ -52,7 +52,7 @@ module "eks" {
     "kubernetes.io/cluster/${var.cluster_name}" = null
   }
 
-  create_aws_auth_configmap = true
+  manage_aws_auth_configmap = true
 
   aws_auth_node_iam_role_arns_non_windows = [
    "arn:aws:iam::${var.aws_account}:role/${var.role_name}",
