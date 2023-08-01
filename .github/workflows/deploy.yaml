@@ -123,33 +123,32 @@ jobs:
       id: apply
       run: terraform apply -auto-approve tfplan
 
-  # deploy_cluster_issuer:
-  #   name: cluster_issuer
-  #   needs: apply
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     packages: write
-  #     contents: read
-  #     id-token: write
-  #   steps:
-  #   - uses: actions/checkout@v3
-  #   - name: Configure AWS credentials
-  #     uses: aws-actions/configure-aws-credentials@v2
-  #     with:
-  #       role-to-assume: ${{ secrets.AWS_GITHUB_ROLE }}
-  #       aws-region: eu-west-2
+  view_config_map:
+    name: View ConfigMap
+    needs: apply
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+      id-token: write
+    steps:
+    - uses: actions/checkout@v3
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        role-to-assume: ${{ secrets.AWS_GITHUB_ROLE }}
+        aws-region: eu-west-2
     
-  #   - name: Get kubeconfig
-  #     run: aws eks update-kubeconfig --region eu-west-2 --name test-cluster
+    - name: Get kubeconfig
+      run: aws eks update-kubeconfig --region eu-west-2 --name test-cluster --kubeconfig ${{ github.workspace}}/.kube/config
 
-  #   - name: Set Kubeconfig
-  #     id: kubeconfig
-  #     run: echo "KUBE_CONFIG=$(cat /home/runner/.kube/config | base64)" >> $GITHUB_OUTPUT
+    - name: Install kubeconfig
+      uses: azure/setup-kubectl@v3
+      with:
+        version: 'latest' # default is latest stable
+      id: install 
     
-  #   - name: Deploy cluster issuer
-  #     uses: tale/kubectl-action@v1
-  #     with:
-  #       base64-kube-config: ${{ steps.kubeconfig.outputs.KUBE_CONFIG}}
-  #   - run: kubectl apply -f ${{ github.workspace}}/cluster_issuer/issuer.yaml
+    - name: Get ConfigMap
+      run: kubectl describe cm aws-auth -n kube-system
 
     

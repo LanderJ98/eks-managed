@@ -48,8 +48,11 @@ module "eks" {
     }
   }
 
-  # aws-auth configmap
-  manage_aws_auth_configmap = true
+  node_security_group_tags = {
+    "kubernetes.io/cluster/${var.cluster_name}" = null
+  }
+
+  create_aws_auth_configmap = true
 
   aws_auth_node_iam_role_arns_non_windows = [
    "arn:aws:iam::${var.aws_account}:role/${var.role_name}",
@@ -64,10 +67,6 @@ module "eks" {
       ]
     }
   ]
-
-  node_security_group_tags = {
-    "kubernetes.io/cluster/${var.cluster_name}" = null
-  }
 
   tags = local.tags
 }
