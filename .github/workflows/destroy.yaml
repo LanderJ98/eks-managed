@@ -33,4 +33,4 @@ jobs:
 
     - name: Terraform Destroy
       id: Destroy
-      run: terraform destroy -auto-approve
+      run: terraform destroy -var 'aws_account=${{ secrets.AWS_ACCOUNT}}' -var 'role_name=${{ secrets.ROLE_NAME}}' -auto-approve
