@@ -140,7 +140,8 @@ jobs:
     
     - name: Install kubectl
       uses: azure/setup-kubectl@v3
-        with: 'latest'
+      with:
+        version: 'latest'
       id: install
     
     - name: Get Kubeconfig
