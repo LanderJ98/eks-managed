@@ -121,4 +121,62 @@ jobs:
     
     - name: Apply
       id: apply
-      run: terraform apply -auto-approve tfplan    
+      run: terraform apply -auto-approve tfplan
+
+  create_cluster_perms:
+    name: Create additional cluster permissions
+    needs: apply
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+      id-token: write
+    steps:
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        role-to-assume: ${{ secrets.AWS_GITHUB_ROLE }}
+        aws-region: eu-west-2
+    
+    - uses: azure/setup-kubectl@v3
+      with:
+        version: 'latest'
+      id: install
+    
+    - name: Get Kubeconfig
+      run: aws eks update-kubeconfig --region eu-west-2 --name test-cluster
+    
+    - name: Create Cluster Role Bindings
+      run: |
+        cat << EOF > crb.yaml
+        apiVersion: rbac.authorization.k8s.io/v1
+        kind: ClusterRole
+        metadata:
+          name: full_access
+        rules:
+        - apiGroups: ["*"]
+          resources: ["*"]
+          verbs: ["*"]
+
+        ---
+
+        apiVersion: rbac.authorization.k8s.io/v1
+        kind: ClusterRoleBinding
+        metadata:
+          name: full_access_crb
+        subjects:
+        - kind: User
+          name: ${{ secrets.ROLE_NAME }}
+          apiGroup: rbac.authorization.k8s.io
+        roleRef:
+          kind: ClusterRole
+          name: full_access
+          apiGroup: rbac.authorization.k8s.io
+        EOF
+
+    - name: Apply Cluster Role Binding
+      run: kubectl apply -f crb.yaml
+      
+
+
+    
