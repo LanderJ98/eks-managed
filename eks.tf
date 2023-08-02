@@ -59,8 +59,7 @@ module "eks" {
       rolearn  = "arn:aws:iam::${var.aws_account}:role/${var.role_name}"
       username = var.role_name
       groups = [
-        "system:bootstrappers",
-        "system:nodes",
+        "systen:masters"
       ]
     }
   ]
