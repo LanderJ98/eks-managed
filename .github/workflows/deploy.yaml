@@ -174,9 +174,6 @@ jobs:
           apiGroup: rbac.authorization.k8s.io
         EOF
 
-    - name: Debug
-      run: cat crb.yaml
-
     - name: Apply Cluster Role Binding
       run: kubectl apply -f crb.yaml
       
