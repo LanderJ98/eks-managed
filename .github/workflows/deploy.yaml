@@ -3,12 +3,6 @@ name: Terraform CI
 on:
   workflow_dispatch:
 
-env:
-  ARM_CLIENT_ID: ${{ secrets.CLIENT_ID }}
-  ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-  ARM_SUBSCRIPTION_ID: ${{ secrets.SUBSCRIPTION_ID }}
-  ARM_TENANT_ID: ${{ secrets.TENANT_ID }}
-
 jobs:
   validate:
     name: Validate
