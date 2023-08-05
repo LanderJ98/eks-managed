@@ -4,12 +4,13 @@ terraform {
       source = "hashicorp/aws"
     }
   }
-  backend "azurerm" {
-    resource_group_name  = "RG-TF-STATE"
-    storage_account_name = "azjltfstate"
-    container_name       = "terraform"
-    key                  = "eks_managed/terraform.tfstate"
-  }
+  cloud {
+        organization = "landerj"
+
+        workspaces {
+            tags = ["eks-managed"]
+        }
+    }
 }
 
 provider "aws" {
