@@ -5,12 +5,12 @@ terraform {
     }
   }
   cloud {
-        organization = "landerj"
+    organization = "landerj"
 
-        workspaces {
-            tags = ["eks-managed"]
-        }
+    workspaces {
+      tags = ["eks-managed"]
     }
+  }
 }
 
 provider "aws" {
