@@ -4,9 +4,10 @@ on:
   workflow_dispatch:
 
 env:
-  TF_CLOUD_ORGANIZATION: "landerj"
-  TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
-  TF_WORKSPACE: "eks-managed"
+  ARM_CLIENT_ID: ${{ secrets.CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.TENANT_ID }}
 
 jobs:
   validate:
@@ -19,8 +20,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: hashicorp/setup-terraform@v2
-      with:
-        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v2
@@ -64,8 +63,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: hashicorp/setup-terraform@v2
-      with:
-        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
     
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v2
@@ -81,11 +78,11 @@ jobs:
       id: plan
       run: terraform plan -var 'aws_account=${{ secrets.AWS_ACCOUNT}}' -var 'role_name=${{ secrets.ROLE_NAME}}'
 
-    # - name: Save TF plan
-    #   uses: actions/upload-artifact@v3
-    #   with:
-    #     name: tfplan
-    #     path: tfplan
+    - name: Save TF plan
+      uses: actions/upload-artifact@v3
+      with:
+        name: tfplan
+        path: tfplan
   
 
   apply:
@@ -99,8 +96,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: hashicorp/setup-terraform@v2
-      with:
-        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
     
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v2
@@ -119,18 +114,14 @@ jobs:
       id: init
       run: terraform init
 
-    - name: Terraform plan
-      id: plan
-      run: terraform plan -var 'aws_account=${{ secrets.AWS_ACCOUNT}}' -var 'role_name=${{ secrets.ROLE_NAME}}'
-
-    # - name: Download Plan
-    #   uses: actions/download-artifact@v3
-    #   with:
-    #     name: tfplan
+    - name: Download Plan
+      uses: actions/download-artifact@v3
+      with:
+        name: tfplan
     
     - name: Apply
       id: apply
-      run: terraform apply -var 'aws_account=${{ secrets.AWS_ACCOUNT}}' -var 'role_name=${{ secrets.ROLE_NAME}}' -auto-approve
+      run: terraform apply -auto-approve tfplan
 
   create_cluster_perms:
     name: Create additional cluster permissions
