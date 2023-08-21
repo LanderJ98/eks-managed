@@ -26,10 +26,6 @@ output "cluster_endpoint" {
 #   value = module.nginx_controller.namespace
 # }
 
-# output "external_dns_role_arn" {
-#   value = module.external_dns_eks_role.iam_role_arn
-# }
-
 # output "external_dns_chart_name" {
 #   value = module.external_dns_deployment.chart_name
 # }
@@ -38,6 +34,14 @@ output "cluster_endpoint" {
 #   value = module.external_dns_deployment.namespace
 # }
 
-output "managed_node_groups" {
-  value =[for x in module.eks.eks_managed_node_groups: values(x)]
+# output "cert_manager_chart_name" {
+#   value = module.cert_manager.chart_name
+# }
+
+# output "cert_manager_namespace" {
+#   value = module.cert_manager.namespace
+# }
+
+output "nameservers" {
+  value = module.zone.route53_zone_name_servers
 }

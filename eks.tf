@@ -17,7 +17,7 @@ module "eks" {
     }
   }
 
-  create_kms_key = false
+  create_kms_key            = false
   cluster_encryption_config = {}
 
   vpc_id                   = module.vpc.vpc_id

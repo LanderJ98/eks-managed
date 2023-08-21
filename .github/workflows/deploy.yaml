@@ -79,13 +79,13 @@ jobs:
     
     - name: Terraform plan
       id: plan
-      run: terraform plan -var 'aws_account=${{ secrets.AWS_ACCOUNT}}' -var 'role_name=${{ secrets.ROLE_NAME}}' -out tfplan
+      run: terraform plan -var 'aws_account=${{ secrets.AWS_ACCOUNT}}' -var 'role_name=${{ secrets.ROLE_NAME}}'
 
-    - name: Save TF plan
-      uses: actions/upload-artifact@v3
-      with:
-        name: tfplan
-        path: tfplan
+    # - name: Save TF plan
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: tfplan
+    #     path: tfplan
   
 
   apply:
@@ -119,14 +119,18 @@ jobs:
       id: init
       run: terraform init
 
-    - name: Download Plan
-      uses: actions/download-artifact@v3
-      with:
-        name: tfplan
+    - name: Terraform plan
+      id: plan
+      run: terraform plan -var 'aws_account=${{ secrets.AWS_ACCOUNT}}' -var 'role_name=${{ secrets.ROLE_NAME}}'
+
+    # - name: Download Plan
+    #   uses: actions/download-artifact@v3
+    #   with:
+    #     name: tfplan
     
     - name: Apply
       id: apply
-      run: terraform apply -auto-approve tfplan
+      run: terraform apply -var 'aws_account=${{ secrets.AWS_ACCOUNT}}' -var 'role_name=${{ secrets.ROLE_NAME}}' -auto-approve
 
   create_cluster_perms:
     name: Create additional cluster permissions
