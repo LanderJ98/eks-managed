@@ -142,3 +142,15 @@ variable "cert_manager_namespace" {
 #   type    = bool
 #   default = true
 # }
+
+variable "cluster_role_name" {
+  type = string
+  description = "Kubernetes metadata cluster role name"
+  default = "full_access"
+}
+
+variable "crb_name" {
+  type = string
+  description = "Kubernetes metadata cluster role binding name"
+  default = "full_access_crb"
+}
