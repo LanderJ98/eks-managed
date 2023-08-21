@@ -17,7 +17,7 @@ resource "kubernetes_config_map_v1" "cert_manager_cm" {
   }
 
   data = {
-   values = <<EOF
+   "values.yml" = <<EOF
       installCRDs: true
     EOF
   }
@@ -30,7 +30,7 @@ resource "kubernetes_config_map_v1" "ingress_nginx_cm" {
   }
 
   data = {
-    values = <<EOF
+    "values.yml" = <<EOF
       controller:
         service:
           annotations:
@@ -49,7 +49,7 @@ resource "kubernetes_config_map_v1" "external_dns_cm" {
   }
 
   data = {
-    values = <<EOF
+    "values.yml" = <<EOF
       rbac:
         apiVersion: v1
       serviceAccount:
