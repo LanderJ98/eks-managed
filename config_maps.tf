@@ -34,9 +34,9 @@ resource "kubernetes_config_map_v1" "ingress_nginx_cm" {
       controller:
         service:
           annotations:
-            "service.beta.kubernetes.io/aws-load-balancer-type": "nlb"
-            "service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol": "true"
-            "service.beta.kubernetes.io/do-loadbalancer-tls-passthrough": "true"
+            service.beta.kubernetes.io/aws-load-balancer-type: nlb
+            service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol": true
+            service.beta.kubernetes.io/do-loadbalancer-tls-passthrough": true
           type: LoadBalancer
     EOF
   }
