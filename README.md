@@ -6,9 +6,23 @@ Dependencies required for local provisioning:
 * aws cli
 * kubectl
 
-## GitHub Actions
+## Deployment using Terraform Cloud
 
-I am using AzureRM as the TF backend due to its state locking abilities but AWS as the Cloud provider to provision resources.
+The current state of the repository is using Terraform Cloud for deployment and state.
+
+ **Note: You cannot locally apply a plan when using TF Cloud VCS setup**
+
+ Follow this guide to setup IAM policies in order for Terraform Cloud to deploy into your AWS Account - https://developer.hashicorp.com/terraform/cloud-docs/workspaces/dynamic-provider-credentials/aws-configuration.
+
+ Extra RBAC along with the aws-auth config map is created - see rbac.tf and eks.tf. This is only needed if you will be accessing the cluster from a **different** aws role locally to the one that initially creates the cluster.
+
+Helm charts are deployed from this repo - https://github.com/LanderJ98/fluxcd-eks.
+
+## Deployment via GitHub Actions (Deprecated)
+
+These are instructions in order to set up Github Actions deployment pipeline if you are using AzureRM for the TF Backend
+
+TF backend due to its state locking abilities but AWS as the Cloud provider to provision resources.
 
 Configuring Azure Service principals
 ```shell
@@ -51,7 +65,9 @@ You will then need to create a trust relationship to look like the below.
 }
 ```
 
-Create a repo secret called AWS_GITHUB_ROLE and the value being the ARN of the role you create earlier
+Create a repo secret called AWS_GITHUB_ROLE and the value being the ARN of the role you create earlier.
+
+The relevant pipelines to use are deploy.yaml and destroy.yaml in .github/workflows
 
 ## Terraform Docs
 
