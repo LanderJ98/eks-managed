@@ -69,45 +69,10 @@ variable "nginx_namespace" {
   default = "nginx"
 }
 
-# variable "nginx_chart_name" {
-#   type    = string
-#   default = "ingress-nginx"
-# }
-
-# variable "nginx_repository" {
-#   type    = string
-#   default = "https://kubernetes.github.io/ingress-nginx"
-# }
-
-# variable "nginx_create_namespace" {
-#   type    = bool
-#   default = true
-# }
-
-# variable "external_dns_release_name" {
-#   type    = string
-#   default = "external-dns"
-# }
-
 variable "external_dns_namespace" {
   type    = string
   default = "kube-system"
 }
-
-# variable "external_dns_chart_name" {
-#   type    = string
-#   default = "external-dns"
-# }
-
-# variable "external_dns_repository" {
-#   type    = string
-#   default = "https://kubernetes-sigs.github.io/external-dns"
-# }
-
-# variable "external_dns_create_namespace" {
-#   type    = bool
-#   default = false
-# }
 
 variable "external_dns_sa_name" {
   type    = string
@@ -118,30 +83,16 @@ variable "install_cert_manager_crds" {
   type    = bool
   default = true
 }
-# variable "cert_manager_release_name" {
-#   type    = string
-#   default = "cert-manager"
-# }
 
 variable "cert_manager_namespace" {
   type    = string
   default = "cert-manager"
 }
 
-# variable "cert_manager_chart_name" {
-#   type    = string
-#   default = "cert-manager"
-# }
-
-# variable "cert_manager_repository" {
-#   type    = string
-#   default = "https://charts.jetstack.io"
-# }
-
-# variable "cert_manager_create_namespace" {
-#   type    = bool
-#   default = true
-# }
+variable "apps_namespace" {
+  type    = string
+  default = "apps"
+}
 
 variable "cluster_role_name" {
   type = string

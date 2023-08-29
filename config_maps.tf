@@ -1,15 +1,3 @@
-resource "kubernetes_namespace_v1" "cert_manager_namespace" {
-  metadata {
-    name = var.cert_manager_namespace
-  }
-}
-
-resource "kubernetes_namespace_v1" "ingress_nginx_namespace" {
-  metadata {
-    name = var.nginx_namespace
-  }
-}
-
 resource "kubernetes_config_map_v1" "cert_manager_cm" {
   metadata {
     name = "cert-manager-config"
