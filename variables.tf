@@ -89,11 +89,6 @@ variable "cert_manager_namespace" {
   default = "cert-manager"
 }
 
-variable "apps_namespace" {
-  type    = string
-  default = "apps"
-}
-
 variable "cluster_role_name" {
   type = string
   description = "Kubernetes metadata cluster role name"

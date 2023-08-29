@@ -9,9 +9,3 @@ resource "kubernetes_namespace_v1" "ingress_nginx_namespace" {
     name = var.nginx_namespace
   }
 }
-
-resource "kubernetes_namespace_v1" "apps_namespace" {
-  metadata {
-    name = var.apps_namespace
-  }
-}
