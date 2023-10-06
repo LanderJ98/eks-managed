@@ -11,6 +11,7 @@ terraform {
       tags = ["eks-managed"]
     }
   }
+  required_version = "~> 1.5.7"
 }
 
 provider "aws" {

@@ -74,7 +74,9 @@ The relevant pipelines to use are deploy.yaml and destroy.yaml in .github/workfl
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.5.7 |
 
 ## Providers
 
